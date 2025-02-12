@@ -1,0 +1,89 @@
+gpus = ["0"]
+inference_size = 16
+
+orientation = ["Transverse","Coronal","Sagittal"]
+
+target_size_AxR = [256, 512, 64]
+target_size_LCR = [128, 512, 64]
+
+## vit
+#target_size_AxR = [512, 512, 64]
+#target_size_LCR = [512, 512, 64]
+
+inference_samples = "/label_test_samples.txt"
+volume_label_path = "/volume/volume_label_json"
+volume_json_path = "/volume/volume_image_json"
+
+# 254
+IM0_path = "/test_data"
+convert_json = false
+
+result_cavass_path = "/Cross/model/label/orientation"
+resulet_nii_path_mul = "/Cross/model/label"
+
+inference_labels = ["AxR","LCR"]
+
+############################################################################
+[labels.AxR]
+model = ["unet3d"]
+checkpoint = "Transverse/AxR_unet_orientation.pth"
+
+model = ["unet_cross"]
+checkpoint = "/orientation/AxR_unet_orientation.pth"
+
+model = ["vit_base_16"]
+checkpoint = "/Transverse/AxR_unet_orientation.pth"
+classifier = "seg"
+n_classes = 2
+patches.grid = [32, 32]
+resnet.num_layers = [3, 4, 9]
+resnet.width_factor = 64
+decoder_channels = [256, 128, 64, 16]
+skip_channels = [512, 256, 64, 16]
+n_skip = 3
+#test_vit
+hidden_size = 1
+transformer.mlp_dim = 1
+transformer.num_heads = 1
+transformer.num_layers = 1
+transformer.attention_dropout_rate = 0.0
+transformer.dropout_rate = 0.1
+
+model = ["unet"]
+checkpoint = "/Transverse/AxR_unet_orientation.pth"
+
+model = ["unet++"]
+checkpoint = "/Transverse/AxR_unet_orientation.pth"
+#############################################################################
+[labels.LCR]
+
+model = ["vit_base_16"]
+checkpoint = "Transverse/LCR_unet_orientation.pth"
+classifier = "seg"
+n_classes = 2
+patches.grid = [32, 32]
+resnet.num_layers = [3, 4, 9]
+resnet.width_factor = 64
+decoder_channels = [256, 128, 64, 16]
+skip_channels = [512, 256, 64, 16]
+n_skip = 3
+#test_vit
+hidden_size = 1
+transformer.mlp_dim = 1
+transformer.num_heads = 1
+transformer.num_layers = 1
+transformer.attention_dropout_rate = 0.0
+transformer.dropout_rate = 0.1
+
+model = ["unet_cross"]
+checkpoint = "/orientation/LCR_unet_orientation.pth"
+
+model = ["unet"]
+checkpoint = "/Transverse/LCR_unet_orientation.pth"
+
+model = ["unet++"]
+checkpoint = "/Transverse/LCR_unet_orientation.pth"
+
+model = ["unet3d"]
+checkpoint = "/Transverse/LCR_unet_orientation.pth"
+

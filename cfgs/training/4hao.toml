@@ -1,0 +1,64 @@
+gpus = ["1"]
+
+dim = "3d"
+task = "_CSAM"
+model = ["UNet", "UNetPlusPlus", "UNet3d", "UnetCross", "UnetCross_mul_loss", "R50-ViT-B_16", "C2BAMUNet/CSAM", "CrossSliceAttentionUNet/CAT"]
+in_channels = 1
+n_classes = 2
+
+
+label = ["LCR"]
+orientation = ["Coronal", "Sagittal", "Transverse"]
+
+
+target_size_AxR = [256, 512, 64]
+target_size_LCR = [128, 512, 64]
+
+#target_size_AxR = [512, 512, 64]
+#target_size_LCR = [512, 512, 64]
+
+# Vit
+classifier = 'seg'
+patches.grid = [32, 32]
+resnet.num_layers = [3, 4, 9]
+resnet.width_factor = 64
+decoder_channels = [256, 128, 64, 16]
+skip_channels = [512, 256, 64, 16]
+n_skip = 3
+
+#test_vit
+hidden_size = 1
+transformer.mlp_dim = 1
+transformer.num_heads = 1
+transformer.num_layers = 1
+transformer.attention_dropout_rate = 0.0
+transformer.dropout_rate = 0.1
+
+# optimizer
+lr = 1e-2
+epochs = 300
+batch_size = 64
+
+val_batch_size = 64
+val_interval = 1
+
+snapshot = "/running"
+
+training_sample_txt = "/3D/label_train_samples.txt"
+val_sample_txt = "/3D/label_val_samples.txt"
+
+# for training
+image = "/16-DS1"
+AxR = "/AxR"
+LCR = "/LCR"
+
+# for validation
+[volume_sample_dir]
+image = "/volume/volume_image_json"
+LCR = "/volume/volume_LCR_json"
+AxR = "/volume/volume_AxR_json"
+
+# Accelerator
+[cudnn]
+benchmark = true
+deterministic = false
