@@ -21,3 +21,4 @@ We selected the best metrics for each category of methods (based on Dice scores)
 - GCC 7.5.0
 - G++ 7.5.0
 ## Usage
+The relevant model code is located in the file ./jhammer/models/unet.py.
