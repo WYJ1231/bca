@@ -13,7 +13,7 @@ We selected the best metrics for each category of methods (based on Dice scores)
 |the Lower Cervical Region| 2.5D | 298.19  | 0.7907 | 8.98 | 2.41 |
 |the Lower Cervical Region| 3D | 333.95 | 0.7443 | 11.10 | 2.44 |
 |the Lower Cervical Region| Ours | 42.84 | 0.8114 | 8.10 | 1.30 |
-## Environmrnt 
+## Environment 
 - Ubuntu 20.04.6
 - Python 3.8
 - Pytorch 1.13.1+cu116
